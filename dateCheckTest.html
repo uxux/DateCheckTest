@@ -12,8 +12,11 @@
     require(["dojo/date", "dojo/dom", "dojo/domReady!"],
     function(date, dom){
       var today = new Date();
+      // 最終ログイン日ロック日
       var saisyuLoginLockBiTo = dojo.date.add(today,"month",-15);
+      // 最終ログイン日1(アンロック)
       var saisyuLoginBi1 = new Date(2013, 5, 16);
+      // 最終ログイン日2(ロック)
       var saisyuLoginBi2 = new Date(2013, 2, 16);
       
     // saisyuLoginLockBiTo = dojo.date.stamp.toISOString(saisyuLoginLockBiTo);
@@ -24,42 +27,62 @@
       var date1 = new Date(2013, 5, 16, 0, 12, 27);
       var date2 = new Date(1973, 5, 16, 0, 12, 27);
       
-      switch(date.compare(saisyuLoginLockBiTo, saisyuLoginBi1)){
-      case 0:
-        var rainman = saisyuLoginLockBiTo + " is the same as " + saisyuLoginBi1 + "</br>";
-        break;
-      case 1:
-        var rainman = saisyuLoginLockBiTo + " is after " + saisyuLoginBi1 + "</br>";
-        break;
-      case -1:
-        var rainman = saisyuLoginLockBiTo + " is before " + saisyuLoginBi1 + "</br>";
-        break;
+      // ロック期間最終日 > 最終ログイン日
+      if(saisyuLoginLockBiTo >= saisyuLoginBi2){
+        // 最終ログインロック日より最終ログイン日が後(アンロック)
+        var rainman ="最終ログインロックTo:" + saisyuLoginLockBiTo.toISOString() + " is after " + "<br>" + "最終ログイン日:" + saisyuLoginBi2.toISOString() + "</br>";
+        console.log("最終ログイン日は1年3ヶ月以内です。ロックされていません。");
+        
+      }else{
+        // 最終ログインロック日より最終ログイン日が前(ロック状態)
+        var rainman ="最終ログインロックTo:" +  saisyuLoginLockBiTo.toISOString() + " is before " + "<br>" + "最終ログイン日:" + saisyuLoginBi2.toISOString() + "</br>";
+        console.log("最終ログイン日は1年3ヶ月を過ぎています。ロックされています。");
+        
       }
       
-      switch(date.compare(saisyuLoginLockBiTo, saisyuLoginBi2, "time")){
-      case 0:
-        rainman += saisyuLoginLockBiTo + " is the same time as " + saisyuLoginBi2 + "</br>";
-        break;
-      case 1:
-        rainman += saisyuLoginLockBiTo + " time is after " + saisyuLoginBi2 + "</br>";
-        break;
-      case -1:
-        rainman += saisyuLoginLockBiTo + " time is before " + saisyuLoginBi2 + "</br>";
-        break;
-      }
+      
+      
+    // switch(date.compare(saisyuLoginLockBiTo, saisyuLoginBi1)){
+    //  case 0:
+    //    var rainman = saisyuLoginLockBiTo + " is the same as " + saisyuLoginBi1 + "</br>";
+    //    break;
+    //  case 1:
+    //    var rainman = saisyuLoginLockBiTo + " is after " + saisyuLoginBi1 + "</br>";
+    //    break;
+    //  case -1:
+    //    var rainman = saisyuLoginLockBiTo + " is before " + saisyuLoginBi1 + "</br>";
+    //    break;
+    //  }
+      
+    //  switch(date.compare(saisyuLoginLockBiTo, saisyuLoginBi2, "time")){
+    //  case 0:
+    //    rainman += saisyuLoginLockBiTo + " is the same time as " + saisyuLoginBi2 + "</br>";
+    //    break;
+    //  case 1:
+    //    rainman += saisyuLoginLockBiTo + " time is after " + saisyuLoginBi2 + "</br>";
+    //    break;
+    //  case -1:
+    //    rainman += saisyuLoginLockBiTo + " time is before " + saisyuLoginBi2 + "</br>";
+    //    break;
+    //  }
       
       
       dom.byId("rainman").innerHTML = rainman;
+      
+
+      
     
       
       
     });
 	</script>
+
   
     
   </head>
 <body class="claro">
     <strong>Output:</strong>
 <div id="rainman"></div>
+
 </body>
 </html>

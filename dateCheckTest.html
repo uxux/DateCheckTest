@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/dojo.js"></script>
+
+
+
+   <script>
+    require(["dojo/date", "dojo/dom", "dojo/domReady!"],
+    function(date, dom){
+      var today = new Date();
+      var saisyuLoginLockBiTo = dojo.date.add(today,"month",-15);
+      var saisyuLoginBi1 = new Date(2013, 5, 16);
+      var saisyuLoginBi2 = new Date(2013, 2, 16);
+      
+    // saisyuLoginLockBiTo = dojo.date.stamp.toISOString(saisyuLoginLockBiTo);
+    // saisyuLoginBi1 = dojo.date.stamp.toISOString(saisyuLoginBi1);
+    // saisyuLoginBi2 = dojo.date.stamp.toISOString(saisyuLoginBi2);
+      
+      
+      var date1 = new Date(2013, 5, 16, 0, 12, 27);
+      var date2 = new Date(1973, 5, 16, 0, 12, 27);
+      
+      switch(date.compare(saisyuLoginLockBiTo, saisyuLoginBi1)){
+      case 0:
+        var rainman = saisyuLoginLockBiTo + " is the same as " + saisyuLoginBi1 + "</br>";
+        break;
+      case 1:
+        var rainman = saisyuLoginLockBiTo + " is after " + saisyuLoginBi1 + "</br>";
+        break;
+      case -1:
+        var rainman = saisyuLoginLockBiTo + " is before " + saisyuLoginBi1 + "</br>";
+        break;
+      }
+      
+      switch(date.compare(saisyuLoginLockBiTo, saisyuLoginBi2, "time")){
+      case 0:
+        rainman += saisyuLoginLockBiTo + " is the same time as " + saisyuLoginBi2 + "</br>";
+        break;
+      case 1:
+        rainman += saisyuLoginLockBiTo + " time is after " + saisyuLoginBi2 + "</br>";
+        break;
+      case -1:
+        rainman += saisyuLoginLockBiTo + " time is before " + saisyuLoginBi2 + "</br>";
+        break;
+      }
+      
+      
+      dom.byId("rainman").innerHTML = rainman;
+    
+      
+      
+    });
+	</script>
+  
+    
+  </head>
+<body class="claro">
+    <strong>Output:</strong>
+<div id="rainman"></div>
+</body>
+</html>
